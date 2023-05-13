@@ -1,0 +1,83 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+	
+	<head>
+		<title>List Cars</title>
+		
+		<link rel="stylesheet" 
+			href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" 
+			integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" 
+			crossorigin="anonymous" />
+	</head>
+
+    <body>
+		
+		<div class="container">
+		
+			<h3>List Cars</h3>
+			
+			<hr/>
+		
+			<table class="table table-bordered table-striped">
+			
+				<thead>
+					<tr>
+						<th>id</th>
+						<th>type</th>
+                        <th>seats</th>
+						<th>color</th>
+						<th>Color change</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="car: ${cars}">
+						<td th:text="${car.carId}" />
+						<td th:text="${car.type}" />
+						<td th:text="${car.seats}" />
+                        <td th:text="${car.color}" /> 
+						<td>
+							<form  th:action="@{'redupdate/' + ${car.carId}}" method="post">
+								<input name="_method" type="hidden" value="PUT">
+								<input type="submit" value="Red">
+							</form>
+							<form  th:action="@{'yellowupdate/' + ${car.carId}}" method="post">
+								<input name="_method" type="hidden" value="PUT">
+								<input type="submit" value="Yellow">
+							</form>
+							<form  th:action="@{'blackupdate/' + ${car.carId}}" method="post">
+								<input name="_method" type="hidden" value="PUT">
+								<input type="submit" value="Black">
+							</form>
+							<form  th:action="@{'whiteupdate/' + ${car.carId}}" method="post">
+								<input name="_method" type="hidden" value="PUT">
+								<input type="submit" value="White">
+							</form>
+						</td>
+					</tr>
+				</tbody>
+				<tfoot>
+					<tr>
+						<td>
+						  <form method="POST"  action="http://127.0.0.1:8080/api/addminibus">
+							<input type="submit" value="Add minibus">
+						</form>
+						</td>
+						<td>
+						  <form method="POST"  action="http://127.0.0.1:8080/api/addhatchback">
+							<input type="submit" value="Add hatchback">
+						</form>
+						</td>
+						<td>
+						  <form method="POST"  action="http://127.0.0.1:8080/api/addsportcar">
+							<input type="submit" value="Add sportcar">
+						</form>
+						</td>
+					  </tr>
+				</tfoot>
+				
+			</table>
+		</div>
+		
+		
+	</body>
+	
+</html>
